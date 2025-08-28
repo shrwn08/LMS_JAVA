@@ -1,4 +1,12 @@
 package LMS_Package;
 
-public class Loan {
+import java.util.Date;
+
+public class Loan extends Librarian {
+    String name;
+    String title;
+    Date issueDate;
+    Date returnDate;
+
+
 }
