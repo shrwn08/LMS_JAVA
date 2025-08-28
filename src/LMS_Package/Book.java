@@ -23,4 +23,9 @@ public class Book {
         System.out.println("title : " +title +"\n"+ "author :"+author+ "\n" + "rating :"+rating+ "\n"+"numberOfBooks :"+ numberOfBooks);
     }
 
+    public int decreaseCopies(){
+        numberOfBooks -=1;
+        return numberOfBooks;
+    }
+
 }
