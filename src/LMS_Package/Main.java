@@ -1,7 +1,13 @@
 package LMS_Package;
 
 public class Main {
+
+    //String title, String author, float rating, int numberOfBooks
     public static void main (String[] args){
-        System.out.println("Hello lms");
+
+    Librarian librarian = new Librarian();
+    librarian.addBook();
+
+
     }
 }
