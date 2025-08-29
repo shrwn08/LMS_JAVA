@@ -2,7 +2,7 @@ package LMS_Package;
 
 import java.util.Date;
 
-public class Loan extends Librarian {
+public class Loan  {
    private String name;
     private String title;
     private Date issueDate;

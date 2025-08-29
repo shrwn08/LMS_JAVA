@@ -30,7 +30,7 @@ public class Member {
        );
 
    }
-    enum IDType  {
+    public enum IDType  {
         Adhar_Card, Voter_ID, School_ID
 
     }

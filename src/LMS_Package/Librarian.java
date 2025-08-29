@@ -2,6 +2,7 @@ package LMS_Package;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Librarian  {
     private Member []members = new Member[10];
@@ -23,24 +24,14 @@ public class Librarian  {
         }
     }
 
-    public void addMember (){
-        // name, age, idType = Adhar_Card, Voter_ID, School_ID
-        if(countMember < members.length){
-        members[0] = new Member("Akshay", 22, Member.IDType.Adhar_Card );
-        countMember++;
-        }
-
-        for(Member m: members){
-            if(m != null) {
-                m.memberDetails();
-                System.out.println("--------------------------------------------------------");
-            }
-        }
-    }
-
     public void issueBook(String name, String title){
-         Member member = null;
+
+
+        Member member = null;
         Book book = null;
+
+        String trimedName = name.trim();
+        String trimedTitle = title.trim();
 
         Date issueDate = new Date();
         Calendar cal = Calendar.getInstance();
@@ -50,14 +41,16 @@ public class Librarian  {
         Date dueDate = cal.getTime();
 
         for(Member m : members){
-            if(m != null && m.getName().equalsIgnoreCase(name)){
+            if(m != null && m.getName().equalsIgnoreCase(trimedName)){
                 member = m;
                 break;
             }
         }
 
+
+
         for(Book b : books){
-            if(b!=null && b.title.equalsIgnoreCase(title)){
+            if(b!=null && b.getTitle().equalsIgnoreCase(trimedTitle)){
                 book = b;
                 break;
             }
@@ -70,16 +63,60 @@ public class Librarian  {
             System.out.println("Book not found: " + title);
             return;
         }
-        if (book.numberOfBooks <= 0) {
+        if (book.getNumberOfBooks() <= 0) {
             System.out.println("Book not available: " + title);
             return;
         }
-        Loan firstLoan = new Loan(member.getName(),book.title,issueDate,dueDate);
+
+        Loan firstLoan = new Loan(member.getName(),book.getTitle(),issueDate,dueDate);
 
         firstLoan.loanDetails();
         book.decreaseCopies();
     }
 
+    public void addMember (){
+        // name, age, idType = Adhar_Card, Voter_ID, School_ID
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("New Member name?");
+        String name = sc.nextLine();
+
+        System.out.println("Member's Age?");
+        int age = sc.nextInt();
+        sc.nextLine();
+
+        Member.IDType idType = Member.IDType.Adhar_Card;
+        System.out.println("Choose your Id: \n 1. Adhar_Card \n 2.Voter_ID \n 3. School_ID");
+        int choice = sc.nextInt();
+        switch (choice){
+            case 1: idType =  Member.IDType.Adhar_Card;
+            break;
+            case 2: idType = Member.IDType.Voter_ID;
+            break;
+            case 3 : idType = Member.IDType.School_ID;
+            break;
+            default: System.out.println("invalid choice");
+        }
+
+
+        if(countMember < members.length){
+        members[countMember] = new Member(name, age, idType );
+        countMember++;
+        }
+
+        for(Member m: members){
+            if(m != null) {
+                m.memberDetails();
+                System.out.println("--------------------------------------------------------");
+            }
+        }
+
+        System.out.println("Enter the title name");
+        String bookName = sc.nextLine();
+        sc.nextLine();
+
+        issueBook(name,bookName);
+    }
 
 }
 
