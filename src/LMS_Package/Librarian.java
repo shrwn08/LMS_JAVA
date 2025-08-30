@@ -115,7 +115,7 @@ public class Librarian  {
         String bookName = sc.nextLine();
         sc.nextLine();
 
-        issueBook(name,bookName);
+
     }
 
 }

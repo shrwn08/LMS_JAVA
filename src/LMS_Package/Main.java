@@ -18,23 +18,24 @@ public class Main {
         boolean askMemberForRegisteration = sc.nextBoolean();
         sc.nextLine();
 
+        String memberName;
+        String bookName;
 
-        if(askMemberForRegisteration){
-            String memberName;
-            String bookName;
+        System.out.println("Enter member's name?");
+        memberName = sc.nextLine();
 
-            System.out.println("Enter your name?");
-            memberName = sc.nextLine();
-            sc.nextLine();
+        System.out.println("Enter book name?");
+        bookName = sc.nextLine();
 
-            System.out.println("Enter your book name?");
-            bookName = sc.nextLine();
+        if(!askMemberForRegisteration){
 
 
+            System.out.println("name: "+  memberName + "\n" +"book: "+ bookName);
+            librarian.addMember();
             librarian.issueBook(memberName, bookName);
 
         }else{
-            librarian.addMember();
+            librarian.issueBook(memberName, bookName);
         }
 
 
